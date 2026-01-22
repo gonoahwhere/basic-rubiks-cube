@@ -1,0 +1,96 @@
+/* ===== FONTS ===== */
+@import url('https://fonts.googleapis.com/css2?family=Sniglet&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
+/* ===== MAIN UI ===== */
+body {
+    margin: 0;
+    font-family: 'Rubik', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: #373a42;
+    color: #ccc;
+    overflow-x: hidden;
+}
+
+h1 {
+    font-size: 3em !important;
+}
+
+/* ===== APP TITLE/SUBTITLE ===== */
+.page-title {
+    text-align: center;
+    color: #ccc
+}
+
+.page-subtitle {
+    text-align: center;
+    opacity: 0.7;
+    margin-top: -1.2rem;
+}
+
+
+
+/* ===== TOP RIGHT RIBBON ===== */
+.cube-ribbon {
+    background-attachment: scroll;
+    background-clip: border-box;
+    background-color: rgba(0, 0, 0, 0);
+    background-origin: padding-box;
+    background-position-x: 0;
+    background-position-y: 0;
+    background-size: auto;
+    color: rgba(204, 0, 0);
+    cursor: default;
+    display: block;
+    font-family: 'Rubik', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    position: absolute;
+    right: 0px;
+    text-decoration-color: rgb(204, 0, 0);
+    text-decoration-line: none;
+    text-decoration-style: solid;
+    top: 0px;
+    text-indent: -9999px;
+    z-index: 9999;
+}
+
+.cube-ribbon:before {
+    content: "";
+    padding: .38rem 0;
+    background-color: #4a4e58;
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.15));
+    box-shadow: 0 0.15em 0.23em 0 rgba(0, 0, 0, 0.5);
+}
+
+.cube-ribbon:after {
+    content: attr(data-ribbon);
+    color: #ccc;
+    font-family: 'Rubik', sans-serif;
+    font-size: 1em;
+    font-weight: 700;
+    line-height: 1.54em;
+    text-decoration: none;
+    text-shadow: 0 -0.08em rgba(0, 0, 0, 0.5);
+    text-align: center;
+    text-indent: 0;
+    padding: .15em 0;
+    margin: .15em 0;
+    border-width: .08em 0;
+    border-style: dotted;
+    border-color: #ccc;
+    border-color: rgba(204, 204, 204, 0.7);
+}
+
+.cube-ribbon:before,
+.cube-ribbon:after {
+    position: absolute;
+    display: block;
+    width: 15.38em;
+    height: 1.54em;
+    top: 3.23em;
+    right: -3.23em;
+    transform: rotate(45deg);
+    box-sizing: content-box;
+}

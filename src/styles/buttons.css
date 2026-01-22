@@ -1,0 +1,47 @@
+/* ===== BUTTONS ====== */
+.button-rubik,
+.button-rubik:link,
+.button-rubik:visited,
+.button-rubik:hover,
+.button-rubik:active,
+.button-rubik:focus {
+    font-family: 'Rubik', sans-serif;
+    background-color: #5a5d68;
+    color: #ccc;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    outline: none;
+    padding: 10px 20px;
+    margin: 0 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(90, 93, 104, 0.4);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    font-weight: bold;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.button-rubik:hover,
+.button-rubik:focus {
+    background-color: #4a4d57;
+    box-shadow: 0 6px 12px rgba(74, 77, 87, 0.6);
+    outline: none;
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.button-rubik:active {
+    background-color: #3f424b;
+    box-shadow: 0 2px 4px rgba(63, 66, 75, 0.8);
+    text-decoration: none;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* ===== LABELS ===== */
+label {
+    font-family: 'Rubik', sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+}

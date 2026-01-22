@@ -1,0 +1,52 @@
+/* ===== CUSTOM ALERTS ===== */
+.noah-alert {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 16px;
+    min-width: 260px;
+    border-radius: 12px;
+    background: #1e1e1e;
+    border: 1px solid #3e3e3e;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+    z-index: 9999;
+}
+
+.noah-alert-msg {
+    margin-bottom: 12px;
+}
+
+/* ===== ALERT ANIMATION ===== */
+.fade-in {
+    animation: alertFadeIn 0.2s ease-out forwards;
+}
+
+.fade-out {
+    animation: alertFadeOut 0.2s ease-in forwards;
+}
+
+@keyframes alertFadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.96);
+    }
+  
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+@keyframes alertFadeOut {
+    from {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    to {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.96);
+    }
+}
