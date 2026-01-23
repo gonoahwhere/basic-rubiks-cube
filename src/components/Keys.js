@@ -4,9 +4,9 @@ import { useThree } from '@react-three/fiber'
 import JEASINGS from 'jeasings'
 
 /* ===== FILES =====*/
-import { rotateLayer } from '../utils/Movement'
-import { useKeys } from '../utils/KeyStrokes'
-import { useSound } from '../SoundContext'
+import { rotateLayer, rotateLayerAbsolute } from '../utils/Movement.js'
+import { useKeys } from '../utils/KeyStrokes.js'
+import { useSound } from '../SoundContext.js'
 
 /* ===== MOVES FOR SCRAMBLING ===== */
 const MOVES = [
@@ -32,8 +32,11 @@ function KeyControls({ cubeGroup, rotationCommand, showAlert, openSettings, regi
     const rememberMove = useCallback((face, dir) => {
         if (JEASINGS.getLength()) return
         play("rotate")
-        rotateLayer(cubeGroup.current, rotationGroup.current, camera, face, dir)
-        moveHistory.current.push({ face, dir })
+        const absoluteMove = rotateLayer(cubeGroup.current, rotationGroup.current, camera, face, dir)
+
+        if (absoluteMove) {
+             moveHistory.current.push(absoluteMove)
+        }
     }, [cubeGroup, rotationGroup, camera, play])
 
     // SCRAMBLE THE CUBE
@@ -55,12 +58,12 @@ function KeyControls({ cubeGroup, rotationCommand, showAlert, openSettings, regi
 
         for (const move of reversed) {
             play("rotate")
-            rememberMove(move.face, -move.dir)
+            rotateLayerAbsolute(cubeGroup.current, rotationGroup.current, move.axis, -move.multiplier)
             await sleep(DELAY)
         }
 
         moveHistory.current = []
-    }, [rememberMove, play])
+    }, [cubeGroup, rotationGroup, play])
 
     // CONTROLS FOR BOTH KEYS AND BUTTONS
     useEffect(() => {
