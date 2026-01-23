@@ -82,7 +82,8 @@ export function attachLayerToRotation(cubeGroup, rotationGroup, camera, face) {
         .forEach(function (c) { rotationGroup.attach(c) })
 
     // RETURNS THE AXIS AND DIRECTION SIGN
-    return { axis: worldAxis, sign: axisSign }
+    const layerSide = Math.sign(limit)
+    return { axis: worldAxis, sign: axisSign, layerSide }
 }
 
 // CALCULATES THE AXIS WITH THE LARGEST COMPONENT
@@ -110,12 +111,11 @@ export function rotateLayer(cubeGroup, rotationGroup, camera, face, multiplier) 
         resetRotationGroup(cubeGroup, rotationGroup)
         
         // ATTACHES INDIVIDUAL CUBES TO PIVOT FOR THE SELECTED LAYER
-        const { axis, sign } = attachLayerToRotation(cubeGroup, rotationGroup, camera, face)
+        const { axis, sign, layerSide } = attachLayerToRotation(cubeGroup, rotationGroup, camera, face)
 
         // VISUALLY MOVES THE LAYER, ADJUSTING MULTIPLIER BY AXIS DIRECTION
         const finalMultiplier = multiplier * sign
         animateCubeRotation(rotationGroup, axis, finalMultiplier)
-        const layerSide = ['UP', 'RIGHT', 'FRONT'].includes(face) ? 1 : -1
         return { axis, multiplier: finalMultiplier, layerSide }
     }
     return null
@@ -138,6 +138,6 @@ export function rotateLayerAbsolute(cubeGroup, rotationGroup, axis, layerSide, r
             .forEach(c => rotationGroup.attach(c))
 
         // VISUALLY MOVES THE LAYER
-        animateCubeRotation(rotationGroup, axis, layerSide * rotationDirection)
+        animateCubeRotation(rotationGroup, axis, rotationDirection)
     }
 }

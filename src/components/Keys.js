@@ -2,6 +2,7 @@
 import { useRef, useEffect, useCallback } from 'react'
 import { useThree } from '@react-three/fiber'
 import JEASINGS from 'jeasings'
+import * as THREE from 'three'
 
 /* ===== FILES =====*/
 import { rotateLayer, rotateLayerAbsolute } from '../utils/Movement.js'
@@ -32,10 +33,10 @@ function KeyControls({ cubeGroup, rotationCommand, showAlert, openSettings, regi
     const rememberMove = useCallback((face, dir) => {
         if (JEASINGS.getLength()) return
         play("rotate")
+
         const absoluteMove = rotateLayer(cubeGroup.current, rotationGroup.current, camera, face, dir)
 
         if (absoluteMove) {
-            console.log(`Face: ${face}, Dir: ${dir}, Stored:`, absoluteMove)
             moveHistory.current.push(absoluteMove)
         }
     }, [cubeGroup, rotationGroup, camera, play])
