@@ -35,7 +35,8 @@ function KeyControls({ cubeGroup, rotationCommand, showAlert, openSettings, regi
         const absoluteMove = rotateLayer(cubeGroup.current, rotationGroup.current, camera, face, dir)
 
         if (absoluteMove) {
-             moveHistory.current.push(absoluteMove)
+            console.log(`Face: ${face}, Dir: ${dir}, Stored:`, absoluteMove)
+            moveHistory.current.push(absoluteMove)
         }
     }, [cubeGroup, rotationGroup, camera, play])
 
@@ -58,7 +59,8 @@ function KeyControls({ cubeGroup, rotationCommand, showAlert, openSettings, regi
 
         for (const move of reversed) {
             play("rotate")
-            rotateLayerAbsolute(cubeGroup.current, rotationGroup.current, move.axis, -move.multiplier)
+            const rotationDirection = -Math.sign(move.multiplier)
+            rotateLayerAbsolute(cubeGroup.current, rotationGroup.current, move.axis, move.layerSide, rotationDirection)
             await sleep(DELAY)
         }
 

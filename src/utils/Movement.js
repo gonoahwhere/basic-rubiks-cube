@@ -85,18 +85,6 @@ export function attachLayerToRotation(cubeGroup, rotationGroup, camera, face) {
     return { axis: worldAxis, sign: axisSign }
 }
 
-// ATTACH LAYER BASED ON ABSOLUTE AXIS
-export function attachLayerToRotationAbsolute(cubeGroup, rotationGroup, axis, multiplier) {
-    const limit = 0.5
-    const selectPositive = multiplier > 0
-
-    cubeGroup.children
-        .slice()
-        .reverse()
-        .filter(c => selectPositive ? c.position[axis] > limit : c.position[axis] < - limit)
-        .forEach(c => rotationGroup.attach(c))
-}
-
 // CALCULATES THE AXIS WITH THE LARGEST COMPONENT
 function findDominantAxis(vector) {
     const absX = Math.abs(vector.x)
@@ -127,21 +115,29 @@ export function rotateLayer(cubeGroup, rotationGroup, camera, face, multiplier) 
         // VISUALLY MOVES THE LAYER, ADJUSTING MULTIPLIER BY AXIS DIRECTION
         const finalMultiplier = multiplier * sign
         animateCubeRotation(rotationGroup, axis, finalMultiplier)
-        return { axis, multiplier: finalMultiplier }
+        const layerSide = ['UP', 'RIGHT', 'FRONT'].includes(face) ? 1 : -1
+        return { axis, multiplier: finalMultiplier, layerSide }
     }
     return null
 }
 
-// USE ABSOLUTE AXIS FOR SOLVING
-export function rotateLayerAbsolute(cubeGroup, rotationGroup, axis, multiplier) {
+// // ATTACH LAYER BASED ON ABSOLUTE AXIS, FOR SOLVING
+export function rotateLayerAbsolute(cubeGroup, rotationGroup, axis, layerSide, rotationDirection) {
     if (!JEASINGS.getLength()) {
         // RESETS ANY OF THE INDIVIDUAL CUBES ATTACHED TO PIVOT
         resetRotationGroup(cubeGroup, rotationGroup)
 
         // ATTACHES INDIVIDUAL CUBES TO PIVOT FOR THE SELECTED LAYER ON ABSOLUTE AXIS
-        attachLayerToRotationAbsolute(cubeGroup, rotationGroup, axis, multiplier)
+        const limit = 0.5
+        const selectPositive = layerSide > 0
+
+        cubeGroup.children
+            .slice()
+            .reverse()
+            .filter(c => selectPositive ? c.position[axis] > limit : c.position[axis] < -limit)
+            .forEach(c => rotationGroup.attach(c))
 
         // VISUALLY MOVES THE LAYER
-        animateCubeRotation(rotationGroup, axis, multiplier)
+        animateCubeRotation(rotationGroup, axis, layerSide * rotationDirection)
     }
 }
