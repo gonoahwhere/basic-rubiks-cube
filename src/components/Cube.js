@@ -17,8 +17,8 @@ function Cube({ rotationCommand, cubeControls }) {
     const N = 3
     const offset = (N - 1) / 2
     const colours = {
-        'RIGHT': '#FFA061',
-        'LEFT': '#FF0000',
+        'RIGHT': '#FF0000',
+        'LEFT': '#FFA061',
         'UP': '#FFFFFF',
         'DOWN': '#FFFF00',
         'FRONT': '#00BB00',
